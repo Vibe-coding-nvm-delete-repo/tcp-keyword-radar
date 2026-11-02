@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TCP Keyword Radar v2 | Credit, Mortgage, Auto</title>
+<meta name="description" content="Full seed, SERP, autocomplete and PAA table for credit repair, mortgage, auto and car models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="loading" id="loading">
+  <div class="spinner" aria-hidden="true"></div>
+  <div>Loading seeds and SERP metadata…</div>
+</div>
+
+<header class="topbar">
+  <div class="shell topbar-inner">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <rect x="2" y="7" width="30" height="22" rx="5" fill="#16414f"/>
+        <path d="M8 21.5 12.5 17l3.2 3.2L23 12" stroke="#8fd3c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="26" cy="21" r="2.2" fill="#cd4b2f"/>
+      </svg>
+      <div>
+        <span class="eyebrow">The Credit People</span>
+        <h1>Keyword Radar v2</h1>
+      </div>
+    </div>
+    <div class="meta">
+      <div><strong id="meta-seeds">4,847</strong> seeds mined</div>
+      <div><strong id="meta-pages">13,105</strong> live pages checked</div>
+      <div>Data pulled <strong>November 2, 2026</strong></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="shell tabs-inner">
+    <button class="tab active" data-view="overview">Overview</button>
+    <button class="tab" data-view="seeds">Seed table</button>
+    <button class="tab" data-view="converted">Converted pages</button>
+    <button class="tab" data-view="keywords">Keywords</button>
+    <button class="tab" data-view="ideas">Page ideas</button>
+    <button class="tab" data-view="method">Method</button>
+  </div>
+</nav>
+
+<main class="shell">
+
+  <section class="view active" id="view-overview">
+    <div class="hero">
+      <div class="kicker">Credit, mortgage, auto and car models</div>
+      <h2>Every seed, every SERP, every gap.</h2>
+      <p>This pass expands beyond the 24 converted pages. It builds 4,847 seeds across credit repair, credit score, mortgage, auto finance and 2026 and used car models. Every seed has live autocomplete and Bing top 10 metadata. Every page idea is judged against 13,105 live pages.</p>
+    </div>
+    <div class="grid grid-4" id="stat-grid"></div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="row between" style="margin-bottom:12px">
+          <div><h3 style="margin:0">Top opportunities</h3><div class="small muted">New or partial ideas, ranked by evidence.</div></div>
+          <button class="btn btn-ghost small" data-go="ideas">See all</button>
+        </div>
+        <div id="top-opportunities"></div>
+      </div>
+      <div class="card">
+        <h3>Seeds by category</h3>
+        <div id="cluster-chart"></div>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div class="card"><h3>Sources</h3><div id="source-list"></div></div>
+      <div class="card"><h3>Limits</h3><ul class="list muted" id="limit-list"></ul></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-converted">
+    <div class="hero">
+      <div class="kicker">The starting set</div>
+      <h2>The 24 converted pages, with a full top 10 and PAA.</h2>
+      <p>Each page has its seed query, Bing top 10, Google PAA where available, and its keyword demand. This is the full SERP check for the pages that already converted.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:30%">Converted page</th><th>Cluster</th><th>Seed</th><th>KW</th><th>Top result</th><th>PAA</th><th>Words</th></tr></thead>
+        <tbody id="conv-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="view" id="view-seeds">
+    <div class="hero">
+      <div class="kicker">Seed-level metadata</div>
+      <h2>Every seed with its SERP, autocomplete and page idea.</h2>
+      <p>One row per seed. Click a row for the full top 10, autocomplete suggestions, PAA questions, closest live pages and the proposed page.</p>
+    </div>
+    <div class="filters">
+      <input type="search" id="seed-search" placeholder="Search seeds, models, programs…" aria-label="Search seeds">
+      <select id="seed-cluster" aria-label="Category"><option value="">All categories</option></select>
+      <select id="seed-sub" aria-label="Subcategory"><option value="">All subcategories</option></select>
+      <select id="seed-priority" aria-label="Priority"><option value="">Any priority</option><option value="5">5</option><option value="4">4</option><option value="3">3</option></select>
+      <select id="seed-overlap" aria-label="Overlap"><option value="">All overlap</option><option value="clear">Clear</option><option value="possible">Possible</option><option value="likely">Likely</option><option value="covered">Covered</option></select>
+      <span class="count" id="seed-count"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:30%">Seed</th><th>Category</th><th>Pri</th><th>KW</th><th>Top result</th><th>Closest live page</th><th>Overlap</th><th>Page idea</th></tr></thead>
+        <tbody id="seed-body"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="seed-pager"></div>
+  </section>
+
+  <section class="view" id="view-keywords">
+    <div class="hero">
+      <div class="kicker" id="kw-kicker">Loading keywords</div>
+      <h2>Every harvested keyword, with its closest live page.</h2>
+      <p>Demand is a harvested-signal score, not monthly volume. Overlap is a prefilter; the page-idea tab carries the semantic verdict.</p>
+    </div>
+    <div class="filters">
+      <input type="search" id="kw-search" placeholder="Search keywords…" aria-label="Search keywords">
+      <select id="kw-cluster" aria-label="Category"><option value="">All categories</option></select>
+      <select id="kw-overlap" aria-label="Overlap"><option value="">All overlap</option><option value="clear">Clear</option><option value="possible">Possible</option><option value="likely">Likely</option><option value="covered">Covered</option></select>
+      <select id="kw-type" aria-label="Type"><option value="">All</option><option value="q">Questions</option><option value="t">Topics</option></select>
+      <span class="count" id="kw-count"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:34%">Keyword</th><th>Category</th><th>Demand</th><th>Type</th><th>Seeds</th><th>Closest live page</th><th>Overlap</th></tr></thead>
+        <tbody id="kw-body"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="kw-pager"></div>
+  </section>
+
+  <section class="view" id="view-ideas">
+    <div class="hero">
+      <div class="kicker">White space</div>
+      <h2>Pages we can write without repeating the site.</h2>
+      <p>Every idea is judged against its six closest live pages and the 24 converted pages. <strong>New</strong> means the job is not served. <strong>Partial</strong> is adjacent but distinct. Overlap and merge stay visible.</p>
+    </div>
+    <div class="filters">
+      <input type="search" id="idea-search" placeholder="Search page ideas…" aria-label="Search page ideas">
+      <select id="idea-cluster" aria-label="Category"><option value="">All categories</option></select>
+      <select id="idea-verdict" aria-label="Verdict"><option value="">All verdicts</option><option value="new">New</option><option value="partial">Partial</option><option value="overlap">Overlap</option><option value="merge">Merge</option><option value="pending">Pending</option></select>
+      <button class="btn btn-ghost" id="idea-clear">New only</button>
+      <button class="btn btn-ghost" id="idea-export">Export filtered CSV</button>
+      <a class="btn btn-ghost" href="data/opportunities.csv" download>Full CSV</a>
+      <span class="count" id="idea-count"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:32%">Proposed page</th><th>Category</th><th>Primary keyword</th><th>Support</th><th>Closest live page</th><th>Verdict</th></tr></thead>
+        <tbody id="idea-body"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="idea-pager"></div>
+  </section>
+
+  <section class="view" id="view-method">
+    <div class="hero">
+      <div class="kicker">Method and limits</div>
+      <h2>How this was built, and what it does not prove.</h2>
+      <p>All data is live on November 2, 2026. No volume estimates were invented. No page was called new just because its title was different.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card"><h3>Steps</h3><ol class="list muted" id="method-steps"></ol></div>
+      <div class="card"><h3>Honest limits</h3><ul class="list muted" id="method-limits"></ul></div>
+    </div>
+    <div class="card"><h3>Inventory</h3><div id="inventory"></div></div>
+  </section>
+
+</main>
+
+<footer><div class="shell"><div>TCP Keyword Radar v2 · November 2, 2026</div><div>Bing top 10 and Bing autocomplete for every seed. Google PAA sample.</div></div></footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div><h3 id="drawer-title">Details</h3><div class="drawer-sub" id="drawer-sub"></div></div>
+    <button class="icon-btn" id="drawer-close" aria-label="Close details"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+</aside>
+
+<script src="data/meta.js"></script>
+<script src="data/seeds.js"></script>
+<script src="data/converted.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
