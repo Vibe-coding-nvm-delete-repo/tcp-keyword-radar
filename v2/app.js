@@ -92,7 +92,7 @@
   function renderStats() {
     const cards = [
       { n: fmt(M.seeds), l: 'Seeds mined', note: (M.with_autocomplete || 0) + ' with autocomplete', go: 'seeds' },
-      { n: fmt(M.with_serp), l: 'Seeds with top 10', note: 'Bing, US market', go: 'seeds' },
+      { n: fmt(M.with_serp), l: 'Seeds with a relevant top 10', note: 'Bing, US market, filtered for relevance', go: 'seeds' },
       { n: fmt(M.keywords), l: 'Keywords', note: 'autocomplete and seed terms', go: 'keywords' },
       { n: fmt(M.ready || 0), l: 'Ready page ideas', note: 'judged new or partial, after dedupe', go: 'ideas' },
     ];
@@ -182,16 +182,13 @@
       const m = s.m && s.m[0];
       const idea = s.idea;
       return '<tr class="rowlink" data-i="' + (start + i) + '">' +
-        '<td class="kw">' + esc(s.s) + '<span class="tiny">' + esc(sname(s.sub)) + '</span></td>' +
-        '<td>' + esc(cname(s.c)) + '</td>' +
-        '<td class="mono">' + esc(s.p) + '</td>' +
-        '<td class="mono small">' + fmt(s.n) + '<span class="tiny">demand ' + one(s.d) + '</span></td>' +
-        '<td class="url">' + (top ? link(top.u, top.t) : '<span class="muted">No results</span>') + '</td>' +
+        '<td class="kw">' + esc(s.s) + '<span class="tiny">' + esc(sname(s.sub)) + ' · P' + esc(s.p) + ' · ' + fmt(s.n) + ' kw</span></td>' +
+        '<td class="url">' + (top ? link(top.u, top.t) + '<span class="tiny">' + esc(top.d) + '</span>' : '<span class="muted">No relevant result</span><span class="tiny">' + fmt(s.raw || 0) + ' raw Bing results</span>') + '</td>' +
         '<td class="url">' + (m ? link(m.u, m.t) : '<span class="muted">None</span>') + '</td>' +
         '<td>' + ovBadge(s.ov) + '</td>' +
         '<td class="url">' + (idea ? esc(idea.title) + '<span class="tiny">' + ovBadge(idea.verdict) + '</span>' : '<span class="muted">No idea</span>') + '</td>' +
       '</tr>';
-    }).join('') || '<tr><td colspan="8"><div class="empty">No seeds match.</div></td></tr>';
+    }).join('') || '<tr><td colspan="5"><div class="empty">No seeds match.</div></td></tr>';
     $('#seed-pager').innerHTML = '<button ' + (state.seeds.page <= 1 ? 'disabled' : '') + ' data-page="' + (state.seeds.page - 1) + '">Previous</button><span class="page">Page ' + state.seeds.page + ' of ' + pages + '</span><button ' + (state.seeds.page >= pages ? 'disabled' : '') + ' data-page="' + (state.seeds.page + 1) + '">Next</button>';
     $$('#seed-pager button').forEach((b) => b.addEventListener('click', () => { state.seeds.page = Number(b.dataset.page); renderSeeds(); }));
     $$('#seed-body tr[data-i]').forEach((tr) => tr.addEventListener('click', () => openSeed(seedFiltered[Number(tr.dataset.i)])));
