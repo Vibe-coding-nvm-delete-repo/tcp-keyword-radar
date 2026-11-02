@@ -401,3 +401,7 @@ footer .shell { display: flex; justify-content: space-between; gap: 20px; flex-w
   #view-seeds td:nth-child(5)::before { content: "Page idea"; }
   #view-seeds td.kw { margin-bottom: 4px; }
 }
+
+@media (max-width: 640px) {
+  .grid-4 { grid-template-columns: 1fr; }
+}
