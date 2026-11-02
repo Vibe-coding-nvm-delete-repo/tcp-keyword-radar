@@ -138,7 +138,7 @@
   function renderConverted() {
     $('#conv-body').innerHTML = C.map((c, i) => {
       const top = c.g && c.g[0];
-      return '<tr class="rowlink" data-c="' + i + '"><td class="kw">' + esc(c.title || c.seed) + '<span class="tiny">' + esc(c.url.replace(/^https?:\/\/(www\.)?/, '')) + '</span></td><td>' + esc(cname(c.cluster)) + '</td><td class="small">' + esc(c.seed) + '</td><td class="mono small">' + fmt(c.kw_count) + '</td><td class="url">' + (top ? link(top.u, top.t) : '<span class="muted">No results</span>') + '</td><td class="mono small">' + fmt((c.paa || []).length) + '</td><td class="mono small">' + fmt(c.words) + '</td></tr>';
+      return '<tr class="rowlink" data-c="' + i + '"><td class="kw">' + esc(c.title || c.seed) + '<span class="tiny">' + esc(c.url.replace(/^https?:\/\/(www\.)?/, '')) + '</span></td><td>' + esc(cname(c.cluster)) + '</td><td class="small">' + esc(c.seed) + '</td><td class="mono small">' + fmt(c.kw_count) + '</td><td class="url">' + (top ? link(top.u, top.t) + '<span class="tiny">' + esc(c.engine || '') + '</span>' : '<span class="muted">No relevant result</span>') + '</td><td class="mono small">' + fmt((c.paa || []).length) + '</td><td class="mono small">' + fmt(c.words) + '</td></tr>';
     }).join('');
     $$('#conv-body tr[data-c]').forEach((tr) => tr.addEventListener('click', () => openConverted(C[Number(tr.dataset.c)])));
   }
@@ -147,7 +147,7 @@
     const paa = (c.paa || []).map((x) => '<li>' + esc(x) + '</li>').join('');
     const html = '<div class="row" style="margin-bottom:12px"><span class="chip">' + esc(cname(c.cluster)) + '</span><span class="chip">' + fmt(c.words) + ' words</span></div>' +
       (c.core_intent ? '<div class="callout"><div class="kicker">Core intent</div><p class="small">' + esc(c.core_intent) + '</p></div>' : '') +
-      '<dl class="kv"><dt>Seed</dt><dd>' + esc(c.seed) + '</dd><dt>SERP query</dt><dd>' + esc(c.serp_query || 'none') + '</dd><dt>Keywords</dt><dd>' + fmt(c.kw_count) + ' · demand ' + one(c.demand) + '</dd></dl>' +
+      '<dl class="kv"><dt>Seed</dt><dd>' + esc(c.seed) + '</dd><dt>SERP engine</dt><dd>' + esc(c.engine || 'none') + '</dd><dt>Keywords</dt><dd>' + fmt(c.kw_count) + ' · demand ' + one(c.demand) + '</dd></dl>' +
       '<h4 style="margin-top:18px">Top 10 results</h4>' + (top ? '<ul class="list">' + top + '</ul>' : '<p class="small muted">No Bing results saved.</p>') +
       (paa ? '<h4 style="margin-top:18px">People Also Ask</h4><ul class="list">' + paa + '</ul>' : '');
     openDrawer(c.title || c.seed, c.url.replace(/^https?:\/\/(www\.)?/, ''), html);
