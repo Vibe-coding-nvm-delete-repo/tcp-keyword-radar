@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TCP Keyword Radar | The Credit People</title>
+<meta name="description" content="Converted pages, live SERP, autocomplete and People Also Ask data, and the non-overlapping page opportunities for thecreditpeople.com.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="loading" id="loading">
+  <div class="spinner" aria-hidden="true"></div>
+  <div>Loading 11,497 keywords and 1,098 SERPs…</div>
+</div>
+
+<header class="topbar">
+  <div class="shell topbar-inner">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <rect x="2" y="7" width="30" height="22" rx="5" fill="#16414f"/>
+        <path d="M8 21.5 12.5 17l3.2 3.2L23 12" stroke="#8fd3c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="26" cy="21" r="2.2" fill="#cd4b2f"/>
+      </svg>
+      <div>
+        <span class="eyebrow">The Credit People</span>
+        <h1>Keyword Radar</h1>
+      </div>
+    </div>
+    <div class="meta">
+      <div><strong id="meta-pages">13,105</strong> live pages checked</div>
+      <div>Data pulled <strong>November 2, 2026</strong></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="shell tabs-inner">
+    <button class="tab active" data-view="overview">Overview</button>
+    <button class="tab" data-view="converted">Converted pages</button>
+    <button class="tab" data-view="keywords">Keywords</button>
+    <button class="tab" data-view="serps">SERP &amp; PAA</button>
+    <button class="tab" data-view="ideas">Page ideas</button>
+    <button class="tab" data-view="method">Method</button>
+  </div>
+</nav>
+
+<main class="shell">
+
+  <section class="view active" id="view-overview">
+    <div class="hero">
+      <div class="kicker">Converted pages → live demand → white space</div>
+      <h2>What people search before and after the pages that convert.</h2>
+      <p>This dashboard starts from the 24 converted thecreditpeople.com pages. It harvests live Google and Bing autocomplete, Google People Also Ask, Google top 10 for 22 seed queries, and Bing top 10 for 1,098 queries. Every keyword is matched against 13,105 live pages. Every page idea is checked for semantic overlap.</p>
+    </div>
+
+    <div class="grid grid-4" id="stat-grid"></div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="row between" style="margin-bottom:12px">
+          <div>
+            <h3 style="margin:0">Top opportunities</h3>
+            <div class="small muted">Ideas judged new or partial, ranked by priority and demand.</div>
+          </div>
+          <button class="btn btn-ghost small" data-go="ideas">See all</button>
+        </div>
+        <div id="top-opportunities"></div>
+      </div>
+      <div class="card">
+        <h3>Existing coverage</h3>
+        <div class="small muted" style="margin-bottom:14px">Live pages that already carry each topic. This is the wall any new page has to clear.</div>
+        <div id="coverage-chart"></div>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Sources in this run</h3>
+        <div id="source-list"></div>
+      </div>
+      <div class="card">
+        <h3>What this data can and cannot say</h3>
+        <ul class="list muted" id="limit-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-converted">
+    <div class="hero">
+      <div class="kicker">The starting set</div>
+      <h2>The 24 converted pages, with what each one already answers.</h2>
+      <p>23 pages are live. The Genesis Recovery page is a 404 and is kept here as a gap. The 13 blank lines in the original list could not be recovered, so they are not counted.</p>
+    </div>
+    <div class="filters">
+      <input type="search" id="conv-search" placeholder="Search converted pages…" aria-label="Search converted pages">
+      <select id="conv-cluster" aria-label="Filter converted pages by cluster">
+        <option value="">All clusters</option>
+      </select>
+      <span class="count" id="conv-count"></span>
+    </div>
+    <div class="grid grid-2" id="converted-grid"></div>
+  </section>
+
+  <section class="view" id="view-keywords">
+    <div class="hero">
+      <div class="kicker">11,497 harvested queries</div>
+      <h2>Every keyword, with its closest live page and SERP evidence.</h2>
+      <p>Demand is a harvested-signal score, not monthly volume. Overlap is a prefilter: covered, likely, possible or clear. Click any row to see the seeds, sources, closest pages and top results.</p>
+    </div>
+    <div class="filters">
+      <input type="search" id="kw-search" placeholder="Search keywords…" aria-label="Search keywords">
+      <select id="kw-cluster" aria-label="Filter by cluster"><option value="">All clusters</option></select>
+      <select id="kw-overlap" aria-label="Filter by overlap">
+        <option value="">All overlap states</option>
+        <option value="clear">Clear</option>
+        <option value="possible">Possible</option>
+        <option value="likely">Likely overlap</option>
+        <option value="covered">Covered</option>
+      </select>
+      <select id="kw-type" aria-label="Filter by type">
+        <option value="">Questions and topics</option>
+        <option value="q">Questions only</option>
+        <option value="t">Topics only</option>
+      </select>
+      <select id="kw-source" aria-label="Filter by source">
+        <option value="">Any source</option>
+        <option value="g">Google autocomplete</option>
+        <option value="b">Bing autocomplete</option>
+        <option value="p">Google PAA</option>
+        <option value="r">Google related</option>
+      </select>
+      <span class="count" id="kw-count"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:34%">Keyword</th>
+            <th>Cluster</th>
+            <th>Demand</th>
+            <th>Type</th>
+            <th>Sources</th>
+            <th>Closest live page</th>
+            <th>Overlap</th>
+            <th>Top relevant result</th>
+          </tr>
+        </thead>
+        <tbody id="kw-body"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="kw-pager"></div>
+  </section>
+
+  <section class="view" id="view-serps">
+    <div class="hero">
+      <div class="kicker">SERP and PAA explorer</div>
+      <h2>What the search page actually shows.</h2>
+      <p>Google top 10 is available for the 22 People Also Ask seed queries. Bing top 10 is available for 1,098 queries. Pick a query to see rank, domain, title, snippet, PAA questions and related searches.</p>
+    </div>
+    <div class="filters">
+      <select id="serp-engine" aria-label="Search engine">
+        <option value="google">Google (22 queries with PAA)</option>
+        <option value="bing">Bing (1,098 queries)</option>
+      </select>
+      <select id="serp-query" aria-label="Query" style="flex:1 1 420px"></select>
+      <span class="count" id="serp-count"></span>
+    </div>
+    <div id="serp-content"></div>
+  </section>
+
+  <section class="view" id="view-ideas">
+    <div class="hero">
+      <div class="kicker">White space</div>
+      <h2>Pages we can write that no live page already serves.</h2>
+      <p>447 ideas were screened. Each was judged against the closest live pages and the 24 converted pages. <strong>New</strong> means the reader's job is not served. <strong>Partial</strong> means adjacent but distinct. <strong>Overlap</strong> and <strong>merge</strong> are kept visible so nothing is hidden.</p>
+    </div>
+    <div class="filters">
+      <input type="search" id="idea-search" placeholder="Search page ideas…" aria-label="Search page ideas">
+      <select id="idea-cluster" aria-label="Filter by cluster"><option value="">All clusters</option></select>
+      <select id="idea-verdict" aria-label="Filter by verdict">
+        <option value="">All verdicts</option>
+        <option value="new">New</option>
+        <option value="partial">Partial</option>
+        <option value="overlap">Overlap</option>
+        <option value="merge">Merge</option>
+        <option value="pending">Pending review</option>
+      </select>
+      <select id="idea-origin" aria-label="Filter by origin">
+        <option value="">Both sources</option>
+        <option value="deepseek-2026-11-02">New strategy pass</option>
+        <option value="prior-2026-10-27">Earlier candidate list</option>
+      </select>
+      <button class="btn btn-ghost" id="idea-clear">New only</button>
+      <button class="btn btn-ghost" id="idea-export">Export CSV</button>
+      <span class="count" id="idea-count"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Proposed page</th>
+            <th>Cluster</th>
+            <th>Primary keyword</th>
+            <th>Support</th>
+            <th>Closest live page</th>
+            <th>Verdict</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody id="idea-body"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="idea-pager"></div>
+  </section>
+
+  <section class="view" id="view-method">
+    <div class="hero">
+      <div class="kicker">Method and limits</div>
+      <h2>How this was built, and what it does not prove.</h2>
+      <p>Everything here comes from live pages fetched on November 2, 2026. No volume estimates were invented. No page was called clear just because a title was different.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Steps</h3>
+        <ol class="list muted">
+          <li>Read the 24 converted URLs and match them to the live site index. 23 are live; Genesis Recovery is a 404.</li>
+          <li>Derive one seed query per converted page, then add cluster and company seeds: 241 seeds across six clusters.</li>
+          <li>Harvest Google and Bing autocomplete with alphabet, question and modifier expansions.</li>
+          <li>Harvest Google PAA at click depth 4 for 22 seeds, plus Google top 10 for the same queries.</li>
+          <li>Harvest Bing top 10 for 1,098 queries across every seed.</li>
+          <li>Match all 11,497 keywords to 13,105 live pages with SQLite FTS5 and Porter stemming.</li>
+          <li>Generate page ideas from the keyword gaps and the earlier candidate list, then judge each against the closest live pages.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Honest limits</h3>
+        <ul class="list muted" id="method-limits"></ul>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Data inventory</h3>
+      <div id="inventory"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <div>TCP Keyword Radar · built for The Credit People · November 2, 2026</div>
+    <div>Data: live site, Google Autocomplete, Bing Autocomplete, Google PAA, Bing top 10. No paid volume data.</div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div>
+      <h3 id="drawer-title">Details</h3>
+      <div class="drawer-sub" id="drawer-sub"></div>
+    </div>
+    <button class="icon-btn" id="drawer-close" aria-label="Close details">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+</aside>
+
+<script src="data/meta.js"></script>
+<script src="data/converted.js"></script>
+<script src="data/keywords.js"></script>
+<script src="data/serps.js"></script>
+<script src="data/ideas.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
